@@ -22,7 +22,7 @@ standBtn.addEventListener("click", () => {
     game.stand();
     showHands(game);
 
-    document.getElementById("playerScore").textContent += ` - ${result}`;
+    // document.getElementById("playerScore").textContent += ` - ${game.statusMessage}`;
     hitBtn.disabled = true;
     standBtn.disabled = true;
 });
