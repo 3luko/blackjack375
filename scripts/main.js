@@ -18,7 +18,7 @@ hitBtn.addEventListener("click", () => {
 });
 
 standBtn.addEventListener("click", () => {
-    const result = game.stand(); //capturing the result
+    // const result = game.stand(); //capturing the result
     game.stand();
     showHands(game);
 
@@ -91,8 +91,8 @@ function showHands(game) {
     if (game.isRoundOver) {
         dealerScore.textContent = "Score: " + game.getDealerScore();
     } else {
-        const visibleDealerCard = game.dealerHand[1];
-        dealerScore.textContent = "Score: " + visibleDealerCard.value;
+        // const visibleDealerCard = game.dealerHand[1];
+        dealerScore.textContent = "Score: " + game.calculateScore([game.dealerHand[1]]);
     }
     // update status message
     gameStatus.textContent = game.statusMessage;

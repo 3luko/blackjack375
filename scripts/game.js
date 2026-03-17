@@ -29,6 +29,11 @@ class Game {
 
         console.log("Player Hand:", this.playerHand);
         console.log("Dealer Hand:", this.dealerHand);
+
+        if (this.calculateScore(this.playerHand) === 21){
+            this.statusMessage = "Blackjack! Player!";
+            this.isRoundOver = true;
+        }
     }
 
     // Calculate score
