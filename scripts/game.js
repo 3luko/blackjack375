@@ -7,6 +7,8 @@ class Game {
         this.deck = new Deck();
         this.playerHand = [];
         this.dealerHand = [];
+        this.isRoundOver = false;
+        this.statusMessage = "";
     }
 
     startGame() {
@@ -15,6 +17,8 @@ class Game {
 
         this.playerHand = [];
         this.dealerHand = [];
+        this.isRoundOver = false;
+        this.statusMessage = "Game started. Player's turn.";
 
         // Deal initial cards
         this.playerHand.push(this.deck.dealCard());
@@ -47,19 +51,21 @@ class Game {
     }
 
     hit() {
+        if (this.isRoundOver) return;
         const card = this.deck.dealCard();
         this.playerHand.push(card);
 
-        console.log("Player drew:", card);
-        console.log("Player Score:", this.calculateScore(this.playerHand));
-
         if (this.calculateScore(this.playerHand) > 21) {
-            console.log("Player busts!");
+        this.statusMessage = "Player busts! Dealer wins.";
+        this.isRoundOver = true;
+        } else {
+        this.statusMessage = "Player drew a card.";
         }
     }
 
     stand() {
-        console.log("Player stands. Dealer's turn.");
+        if (this.isRoundOver) return;
+        this.statusMessage = "Player stands. Dealer's turn.";
 
         while (this.calculateScore(this.dealerHand) < 17) {
             this.dealerHand.push(this.deck.dealCard());
@@ -72,15 +78,14 @@ class Game {
         console.log("Dealer Score:", dealerScore);
 
         if (dealerScore > 21 || playerScore > dealerScore) {
-            console.log("Player Wins!");
-            return "Player Wins"
+            this.statusMessage = "Player wins!";
         } else if (dealerScore > playerScore) {
-            console.log("Dealer Wins!");
-            return "Dealer Wins";
+            this.statusMessage = "Dealer wins!";
         } else {
-            console.log("Push (Tie)");
-            return "Push (Tie)!";
+            this.statusMessage = "Push (Tie)";
         }
+
+        this.isRoundOver = true;
     }
     getPlayerScore() {
     return this.calculateScore(this.playerHand);
