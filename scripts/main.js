@@ -55,17 +55,19 @@ function showHands(game) {
 
     // show player cards
     game.playerHand.forEach(card => {
-        const cardEl = document.createElement("div");
+        const cardEl = document.createElement("img");
         cardEl.classList.add("card");
-        cardEl.textContent = `${card.name} ${getSuitSymbol(card.suit)}`;
+        cardEl.src = card.imgPath;
+        cardEl.alt = `${card.value} of ${card.suit}`;
         playerCardsDiv.appendChild(cardEl);
     });
 
     // show dealer cards
     game.dealerHand.forEach(card => {
-        const cardEl = document.createElement("div");
+        const cardEl = document.createElement("img");
         cardEl.classList.add("card");
-        cardEl.textContent = `${card.name} ${getSuitSymbol(card.suit)}`;
+        cardEl.src = card.imgPath;
+        cardEl.alt = `${card.value} of ${card.suit}`;
         dealerCardsDiv.appendChild(cardEl);
     });
 
