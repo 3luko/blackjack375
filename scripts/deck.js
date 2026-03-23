@@ -3,7 +3,7 @@
 class Deck {
     constructor() {
         this.cards = [];
-        this.suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
+        this.suits = ["heart", "diamond", "club", "spade"];
         this.values = [
             { name: "A", value: 11 },
             { name: "2", value: 2 },
@@ -30,7 +30,8 @@ class Deck {
                 this.cards.push({
                     suit: suit,
                     name: val.name,
-                    value: val.value
+                    value: val.value, 
+                    imgPath: `image/${suit}/${val.name}.png`
                 });
             }
         }

@@ -29,9 +29,17 @@ class Game {
 
         console.log("Player Hand:", this.playerHand);
         console.log("Dealer Hand:", this.dealerHand);
+        const playerScore = this.calculateScore(this.playerHand);
+        const dealerScore = this.calculateScore(this.dealerHand);
 
-        if (this.calculateScore(this.playerHand) === 21){
-            this.statusMessage = "Blackjack! Player!";
+        if (playerScore === 21 && dealerScore === 21) {
+            this.statusMessage = "Push (Both Blackjack)";
+            this.isRoundOver = true;
+        } else if (playerScore === 21) {
+            this.statusMessage = "Blackjack! Player wins!";
+            this.isRoundOver = true;
+        } else if (dealerScore === 21) {
+            this.statusMessage = "Dealer has Blackjack!";
             this.isRoundOver = true;
         }
     }
@@ -56,17 +64,19 @@ class Game {
     }
 
     hit() {
-        if (this.isRoundOver) return;
-        const card = this.deck.dealCard();
-        this.playerHand.push(card);
+    if (this.isRoundOver) return;
 
-        if (this.calculateScore(this.playerHand) > 21) {
+    const card = this.deck.dealCard();
+    this.playerHand.push(card);
+
+    if (this.calculateScore(this.playerHand) > 21) {
         this.statusMessage = "Player busts! Dealer wins.";
         this.isRoundOver = true;
-        } else {
+    } else {
         this.statusMessage = "Player drew a card.";
-        }
+        console.log("Player drew:", card);
     }
+}
 
     stand() {
         if (this.isRoundOver) return;
@@ -89,7 +99,6 @@ class Game {
         } else {
             this.statusMessage = "Push (Tie)";
         }
-
         this.isRoundOver = true;
     }
     getPlayerScore() {
@@ -100,5 +109,7 @@ class Game {
     return this.calculateScore(this.dealerHand);
     }
 }
+
+
 
 export default Game;
