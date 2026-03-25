@@ -1,32 +1,33 @@
-// Function to load and render roles
 async function loadRoles() {
     try {
-        // 1. FETCH: Load the JSON file
-        const response = await fetch('./config.json');
+        // Load JSON file
+        const response = await fetch('./scripts/config.json');
         if (!response.ok) throw new Error("Failed to load config.json");
         
         const data = await response.json();
         
-        // 2. DOM REFERENCE: Where the buttons will go
+        // Buttons container
         const container = document.getElementById('roleButtonContainer');
-        container.innerHTML = ''; // Clear "Loading..." or old buttons
+        container.innerHTML = ''; // Clear "Loading..." or old button
 
-        // 3. DATA OPERATION: Iterate (forEach) through the roles array
+        // Get roles from JSON and create buttons
         data.roles.forEach(role => {
-            // Create the button element
             const btn = document.createElement('button');
             btn.textContent = role.name;
             btn.className = "rolebtn";
             
-            // 4. PERSISTENCE: Save selection to localStorage on click
+            // Save selection to localStorage on click
             btn.onclick = () => {
-                // Visual feedback: remove 'selected' from others, add to this one
                 document.querySelectorAll('.rolebtn').forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 
-                // Save the path so the "Join Game" button knows where to go
+                // Save the path to "Join Game" button
                 localStorage.setItem('selectedRolePath', role.path);
                 console.log(`Role selected: ${role.name}`);
+
+                // Change color of selected button
+                document.querySelectorAll('.rolebtn').forEach(b => b.style.backgroundColor = '');
+                btn.style.backgroundColor = '#A9A9A9'; // Green
             };
 
             container.appendChild(btn);
@@ -38,6 +39,18 @@ async function loadRoles() {
             `<p style="color:red">Error loading roles. Check console.</p>`;
     }
 }
+
+const joinGameBtn = document.getElementById('join');
+joinGameBtn.addEventListener('click', () => {
+    const selectedPath = localStorage.getItem('selectedRolePath');
+    if (selectedPath) {
+        window.location.href = selectedPath;
+    } else {
+        alert("Please select a role before joining the game.");
+    }
+    localStorage.removeItem('selectedRolePath'); // Clear selection after use
+});
+
 
 // Initialize when the page is ready
 window.addEventListener('DOMContentLoaded', loadRoles);
