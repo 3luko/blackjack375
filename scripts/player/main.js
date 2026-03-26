@@ -16,7 +16,7 @@ let delayDealerReveal = false;
 homeBtn.addEventListener("click", () => {
     window.location.href = "../../index.html";
 });
-// Pressing H for instructions
+// Pressing Esc for Homepage
 window.addEventListener('keydown', event => {
     if (event.key === 'Esc' || event.key === 'Escape') {
         event.preventDefault();
