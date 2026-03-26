@@ -12,8 +12,8 @@ class Game {
         this.statusMessage = "";
     }
 
-    startGame() {
-        this.deck.createDeck();
+    async startGame() {
+        await this.deck.createDeck();
         this.deck.shuffleDeck();
 
         this.playerHand = [];
@@ -105,7 +105,7 @@ class Game {
     console.log("Dealer Score:", dealerScore);
 
     if (dealerScore > 21 || playerScore > dealerScore) {
-        this.statusMessage = `${username} wins!`;
+        this.statusMessage = `${this.username} wins!`;
     } else if (dealerScore > playerScore) {
         this.statusMessage = "Dealer wins!";
     } else {

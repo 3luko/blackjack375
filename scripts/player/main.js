@@ -42,9 +42,13 @@ function setActionButtonsDisabled(disabled) {
     standBtn.disabled = disabled;
 }
 
-game.startGame();
-showHands();
-updateButtons();
+game.startGame().then(() => {
+    if (hitDeck) {
+        hitDeck.src = game.deck.cardBackPath;
+    }
+    showHands();
+    updateButtons();
+});
 
 hitDeck.addEventListener("dragstart", (event) => {
     if (game.isRoundOver) {
@@ -81,7 +85,7 @@ hitDeck.addEventListener("dragstart", (event) => {
     if (draggedItem !== "hit-card") return;
 
     setActionButtonsDisabled(true);
-    game.statusMessage = `${username} draws a card...`;
+    game.statusMessage = `${game.username} draws a card...`;
     showHands();
 
     await sleep(800);
@@ -112,7 +116,7 @@ hitDeck.addEventListener("dragstart", (event) => {
     if (game.isRoundOver) return;
 
     setActionButtonsDisabled(true);
-    game.statusMessage = `${username} chooses Stand...`;
+    game.statusMessage = `${game.username} chooses Stand...`;
     showHands();
 
     await sleep(1000);
@@ -176,27 +180,26 @@ function showHands() {
 
     // show player cards
     game.playerHand.forEach(card => {
-        const cardEl = document.createElement("img");
-        cardEl.classList.add("card");
-        cardEl.src = card.imgPath;
-        cardEl.alt = `${card.name} of ${card.suit}`;
-        playerCardsDiv.appendChild(cardEl);
+        const cardImgElement = card.render();
+        cardImgElement.alt = `${card.name} of ${card.suit}`; 
+        playerCardsDiv.appendChild(cardImgElement);
     });
 
     // show dealer cards
     game.dealerHand.forEach((card, index) => {
-        const cardEl = document.createElement("img");
-        cardEl.classList.add("card");
+        let cardImgElement;
 
         if ((!game.isRoundOver || delayDealerReveal)&& index === 1) {
-            cardEl.src = "image/card_back.png";
-            cardEl.alt = "Hidden card";
+            cardImgElement = document.createElement("img");
+            cardImgElement.classList.add("card");
+            cardImgElement.src = game.deck.cardBackPath;
+            cardImgElement.alt = "Hidden card";
         } else {
-            cardEl.src = card.imgPath;
-            cardEl.alt = `${card.name} of ${card.suit}`;
+            cardImgElement = card.render();
+            cardImgElement.alt = `${card.name} of ${card.suit}`;
         }
 
-        dealerCardsDiv.appendChild(cardEl);
+        dealerCardsDiv.appendChild(cardImgElement);
     });
 
     playerScore.textContent = "Score: " + game.getPlayerScore();

@@ -1,39 +1,29 @@
 // deck.js
+import Card from "./card.js";
 
 class Deck {
     constructor() {
         this.cards = [];
-        this.suits = ["heart", "diamond", "club", "spade"];
-        this.values = [
-            { name: "A", value: 11 },
-            { name: "2", value: 2 },
-            { name: "3", value: 3 },
-            { name: "4", value: 4 },
-            { name: "5", value: 5 },
-            { name: "6", value: 6 },
-            { name: "7", value: 7 },
-            { name: "8", value: 8 },
-            { name: "9", value: 9 },
-            { name: "10", value: 10 },
-            { name: "J", value: 10 },
-            { name: "Q", value: 10 },
-            { name: "K", value: 10 }
-        ];
     }
 
     // Create the 52-card deck
-    createDeck() {
-        this.cards = [];
+    async createDeck() {
+        try {
+            // Fetch card values from config
+            const response = await fetch('../scripts/config.json');
+            const data = await response.json();
+            this.cardBackPath = data.assets.cardBack;
+            this.cards = [];
 
-        for (let suit of this.suits) {
-            for (let val of this.values) {
-                this.cards.push({
-                    suit: suit,
-                    name: val.name,
-                    value: val.value, 
-                    imgPath: `image/${suit}/${val.name}.png`
-                });
+            for (let suit of data.suits) {
+                for (let cardInfo of data.cards) {
+                    const newCard = new Card(suit, cardInfo.name, cardInfo.value);
+                    this.cards.push(newCard);
+                }
             }
+            console.log(`Deck initialized with ${this.cards.length} cards.`);
+        } catch (error) {
+            console.error("Error creating deck:", error);
         }
     }
 

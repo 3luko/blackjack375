@@ -1,17 +1,18 @@
 // card.js
 
 class Card {
-    constructor(suit, value, imgPath) {
+    constructor(suit, name, value) {
         this.suit = suit;
+        this.name = name;
         this.value = value;
-        this.imgPath = imgPath;
+        this.imgPath = `image/${this.suit}/${this.name}.png`;
     }
 
     render() {
-        const cardImg= document.createElement("img");   
+        const cardImg = document.createElement("img");
         cardImg.src = this.imgPath;
-        cardImg.alt = `${this.value} of ${this.suit}`;
-        cardImg.className = "card-img";
+        cardImg.alt = `${this.name} of ${this.suit}`;
+        cardImg.classList.add("card");
         return cardImg;
     }
 }
