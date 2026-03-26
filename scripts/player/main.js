@@ -7,6 +7,7 @@ const hitDeck = document.getElementById("hitDeck");
 const playerCardsDiv = document.getElementById("playerCards");
 const standBtn = document.getElementById("stand");
 const restartBtn = document.getElementById("restart");
+let delayDealerReveal = false;
 
 homeBtn.addEventListener("click", () => {
     window.location.href = "../../index.html";
@@ -69,14 +70,24 @@ hitDeck.addEventListener("dragstart", (event) => {
     await sleep(800);
 
     game.hit();
+
+    // if player busts still keep dealer hidden until reveal delay
+    if (game.isRoundOver) {
+        delayDealerReveal = true;
+        showHands();          
+        await sleep(1000);    
+        delayDealerReveal = false;
+        showHands();          
+        updateButtons();
+        return;
+    }
+
     showHands();
     updateButtons();
 
     await sleep(400);
 
-    if (!game.isRoundOver) {
-        setActionButtonsDisabled(false);
-    }
+    setActionButtonsDisabled(false);
     updateButtons();
 });
 
@@ -87,24 +98,24 @@ hitDeck.addEventListener("dragstart", (event) => {
     game.statusMessage = "Player chooses Stand...";
     showHands();
 
-    await sleep(800);
+    await sleep(1000);
 
     game.stand();
     showHands();
 
-    await sleep(800);
+    await sleep(1000);
 
     // dealer draws one card at a time with delay
     while (game.getDealerScore() < 17) {
         game.statusMessage = "Dealer draws a card...";
         showHands();
 
-        await sleep(900);
+        await sleep(1200);
 
         game.dealerDrawCard();
         showHands();
 
-        await sleep(900);
+        await sleep(1200);
     }
 
     game.finishDealerTurn();
@@ -120,7 +131,7 @@ restartBtn.addEventListener("click", async () => {
     game.statusMessage = "Starting new round...";
     showHands();
 
-    await sleep(600);
+    await sleep(800);
 
     game.startGame();
     showHands();
@@ -160,7 +171,7 @@ function showHands() {
         const cardEl = document.createElement("img");
         cardEl.classList.add("card");
 
-        if (!game.isRoundOver && index === 1) {
+        if ((!game.isRoundOver || delayDealerReveal)&& index === 1) {
             cardEl.src = "image/card_back.png";
             cardEl.alt = "Hidden card";
         } else {
