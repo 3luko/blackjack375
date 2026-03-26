@@ -2,7 +2,7 @@
     "initialState": {
     "defaultBankroll": 1000,
     "minNameLength": 2,
-    "defaultUsername": "null"
+    "defaultUsername": "Anonymous"
   },
     
     "roles": [

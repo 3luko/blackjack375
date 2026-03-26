@@ -13,6 +13,26 @@ homeBtn.addEventListener("click", () => {
     window.location.href = "../../index.html";
 });
 
+// Load username from localStorage and display it
+// const username = localStorage.getItem('username') || "Player";
+// document.getElementById('username').textContent = username;
+
+// Load initial balance from JSON config
+async function loadInitialBalance() {
+    try {
+        const response = await fetch('./scripts/config.json');
+        if (!response.ok) throw new Error("Failed to load config.json");
+        const data = await response.json();
+        const balance = data.initialState.initialBalance || 1000;
+        document.getElementById('balance').textContent = balance;
+    } catch (error) {
+        console.error("Error loading initial balance:", error);
+        document.getElementById('balance').textContent = "Error";
+    }
+}
+
+loadInitialBalance(); 
+
 // small helper function for delay
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -64,7 +84,7 @@ hitDeck.addEventListener("dragstart", (event) => {
     if (draggedItem !== "hit-card") return;
 
     setActionButtonsDisabled(true);
-    game.statusMessage = "Player draws a card...";
+    game.statusMessage = `${username} draws a card...`;
     showHands();
 
     await sleep(800);
@@ -95,7 +115,7 @@ hitDeck.addEventListener("dragstart", (event) => {
     if (game.isRoundOver) return;
 
     setActionButtonsDisabled(true);
-    game.statusMessage = "Player chooses Stand...";
+    game.statusMessage = `${username} chooses Stand...`;
     showHands();
 
     await sleep(1000);

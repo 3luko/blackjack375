@@ -2,6 +2,10 @@
 
 import Deck from "./deck.js";
 
+// Load username from localStorage and display it
+const username = localStorage.getItem('username') || "Player";
+document.getElementById('username').textContent = username;
+
 class Game {
     constructor() {
         this.deck = new Deck();
@@ -18,7 +22,7 @@ class Game {
         this.playerHand = [];
         this.dealerHand = [];
         this.isRoundOver = false;
-        this.statusMessage = "Game started. Player's turn.";
+        this.statusMessage = `Game started. ${username}'s turn.`;
 
         // Deal initial cards
         this.playerHand.push(this.deck.dealCard());
@@ -27,7 +31,7 @@ class Game {
         this.dealerHand.push(this.deck.dealCard());
         this.dealerHand.push(this.deck.dealCard());
 
-        console.log("Player Hand:", this.playerHand);
+        console.log(`${username} Hand:`, this.playerHand);
         console.log("Dealer Hand:", this.dealerHand);
         const playerScore = this.calculateScore(this.playerHand);
         const dealerScore = this.calculateScore(this.dealerHand);
@@ -36,7 +40,7 @@ class Game {
             this.statusMessage = "Push (Both Blackjack)";
             this.isRoundOver = true;
         } else if (playerScore === 21) {
-            this.statusMessage = "Blackjack! Player wins!";
+            this.statusMessage = `Blackjack! ${username} wins!`;
             this.isRoundOver = true;
         } else if (dealerScore === 21) {
             this.statusMessage = "Dealer has Blackjack!";
@@ -70,17 +74,17 @@ class Game {
     this.playerHand.push(card);
 
     if (this.calculateScore(this.playerHand) > 21) {
-        this.statusMessage = "Player busts! Dealer wins.";
+        this.statusMessage = `${username} busts! Dealer wins.`;
         this.isRoundOver = true;
     } else {
-        this.statusMessage = "Player drew a card.";
-        console.log("Player drew:", card);
+        this.statusMessage = `${username} drew a card.`;
+        console.log(`${username} drew:`, card);
     }
 }
 
     stand() {
     if (this.isRoundOver) return;
-    this.statusMessage = "Player stands. Dealer's turn.";
+    this.statusMessage = `${username} stands. Dealer's turn.`;
 }
     getPlayerScore() {
     return this.calculateScore(this.playerHand);
@@ -100,11 +104,11 @@ class Game {
     const playerScore = this.calculateScore(this.playerHand);
     const dealerScore = this.calculateScore(this.dealerHand);
 
-    console.log("Player Score:", playerScore);
+    console.log(`${username} Score:`, playerScore);
     console.log("Dealer Score:", dealerScore);
 
     if (dealerScore > 21 || playerScore > dealerScore) {
-        this.statusMessage = "Player wins!";
+        this.statusMessage = `${username} wins!`;
     } else if (dealerScore > playerScore) {
         this.statusMessage = "Dealer wins!";
     } else {
