@@ -29,25 +29,25 @@ window.addEventListener('keydown', event => {
 window.addEventListener('keydown', event => {
     if (event.key === 'I' || event.key === 'i') {
         event.preventDefault();
-        window.location.href = "../../instruction.html";
+        window.location.href = "instruction.html";
     }
 });
 //Pressing L for leaderboard
 window.addEventListener('keydown', event => {
     if (event.key === 'L' || event.key === 'l') {
         event.preventDefault();
-        window.location.href = "../../leaderboard.html";
+        window.location.href = "leaderboard.html";
     }
 });
 
 // Instructions button logic
 const instructionBtn = document.getElementById('instruction');
 instructionBtn.addEventListener('click', () => {
-    window.location.href = "../../instruction.html";
+    window.location.href = "instruction.html";
 });
 // Leaderboard button logic
 const leaderboardBtn = document.getElementById('leaderboard');
 leaderboardBtn.addEventListener('click', () => {
-    window.location.href = "../../leaderboard.html";
+    window.location.href = "leaderboard.html";
 });
 
