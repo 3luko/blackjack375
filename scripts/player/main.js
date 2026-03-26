@@ -154,7 +154,7 @@ restartBtn.addEventListener("click", async () => {
 
     await sleep(800);
 
-    game.startGame();
+    await game.startGame();
     showHands();
     updateButtons();
 
