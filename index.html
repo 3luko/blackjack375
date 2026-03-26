@@ -11,7 +11,25 @@
   <body>
     
     <div id="layout">
-    <h1>Blackjack</h1>    
+      <img src="image\blackjacklogo.png" alt="Blackjack Logo" id="logo">
+<details id="instructions">
+  <summary>How to Play</summary>
+  <p>
+    Get as close to 21 as possible without going over.<br><br>
+
+    Card values:<br>
+    • Number cards = face value<br>
+    • J, Q, K = 10<br>
+    • Ace = 1 or 11<br><br>
+
+    How to play:<br>
+    • Player goes first (Hit or Stand)<br>
+    • Dealer draws until 17<br><br>
+
+    Go over 21 = <span id="bad-word">you lose</span>.
+  </p>
+</details>
+  
     <div id="enterName">
         <h3>Please enter your name:</h3>
         <input type="text" id="nameInput" placeholder="Enter your name here">

@@ -18,6 +18,13 @@
     background: white;
 }
 
+#logo {
+    display: block;
+    margin: 20px auto 10px auto;
+    max-width: 400px; /* adjust based on your logo */
+    height: auto;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -35,4 +42,30 @@ body {
     padding: 40px;
     border-radius: 10px;
     text-align: center;
+}
+
+#instructions {
+    max-width: 400px;
+    margin: 15px auto;
+    text-align: left;
+    background: #111;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#instructions summary {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#instructions p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#bad-word{
+    color: red
 }
