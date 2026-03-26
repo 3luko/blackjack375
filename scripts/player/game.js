@@ -2,16 +2,13 @@
 
 import Deck from "./deck.js";
 
-// Load username from localStorage and display it
-const username = localStorage.getItem('username') || "Player";
-document.getElementById('username').textContent = username;
-
 class Game {
-    constructor() {
+    constructor(username) {
         this.deck = new Deck();
         this.playerHand = [];
         this.dealerHand = [];
         this.isRoundOver = false;
+        this.username = username || "Player";
         this.statusMessage = "";
     }
 
@@ -22,7 +19,7 @@ class Game {
         this.playerHand = [];
         this.dealerHand = [];
         this.isRoundOver = false;
-        this.statusMessage = `Game started. ${username}'s turn.`;
+        this.statusMessage = `Game started. ${this.username}'s turn.`;
 
         // Deal initial cards
         this.playerHand.push(this.deck.dealCard());
@@ -31,7 +28,7 @@ class Game {
         this.dealerHand.push(this.deck.dealCard());
         this.dealerHand.push(this.deck.dealCard());
 
-        console.log(`${username} Hand:`, this.playerHand);
+        console.log(`${this.username} Hand:`, this.playerHand);
         console.log("Dealer Hand:", this.dealerHand);
         const playerScore = this.calculateScore(this.playerHand);
         const dealerScore = this.calculateScore(this.dealerHand);
@@ -40,7 +37,7 @@ class Game {
             this.statusMessage = "Push (Both Blackjack)";
             this.isRoundOver = true;
         } else if (playerScore === 21) {
-            this.statusMessage = `Blackjack! ${username} wins!`;
+            this.statusMessage = `Blackjack! ${this.username} wins!`;
             this.isRoundOver = true;
         } else if (dealerScore === 21) {
             this.statusMessage = "Dealer has Blackjack!";
@@ -74,17 +71,17 @@ class Game {
     this.playerHand.push(card);
 
     if (this.calculateScore(this.playerHand) > 21) {
-        this.statusMessage = `${username} busts! Dealer wins.`;
+        this.statusMessage = `${this.username} busts! Dealer wins.`;
         this.isRoundOver = true;
     } else {
-        this.statusMessage = `${username} drew a card.`;
-        console.log(`${username} drew:`, card);
+        this.statusMessage = `${this.username} drew a card.`;
+        console.log(`${this.username} drew:`, card);
     }
 }
 
     stand() {
     if (this.isRoundOver) return;
-    this.statusMessage = `${username} stands. Dealer's turn.`;
+    this.statusMessage = `${this.username} stands. Dealer's turn.`;
 }
     getPlayerScore() {
     return this.calculateScore(this.playerHand);
@@ -104,7 +101,7 @@ class Game {
     const playerScore = this.calculateScore(this.playerHand);
     const dealerScore = this.calculateScore(this.dealerHand);
 
-    console.log(`${username} Score:`, playerScore);
+    console.log(`${this.username} Score:`, playerScore);
     console.log("Dealer Score:", dealerScore);
 
     if (dealerScore > 21 || playerScore > dealerScore) {

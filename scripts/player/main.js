@@ -1,6 +1,7 @@
 import Game from "./game.js";
+import { updateUsername } from '../utils.js';
 
-const game = new Game();
+const game = new Game(updateUsername());
 
 const homeBtn = document.getElementById("home");
 const hitDeck = document.getElementById("hitDeck");
@@ -12,10 +13,6 @@ let delayDealerReveal = false;
 homeBtn.addEventListener("click", () => {
     window.location.href = "../../index.html";
 });
-
-// Load username from localStorage and display it
-// const username = localStorage.getItem('username') || "Player";
-// document.getElementById('username').textContent = username;
 
 // Load initial balance from JSON config
 async function loadInitialBalance() {
