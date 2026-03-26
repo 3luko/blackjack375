@@ -48,7 +48,19 @@ joinGameBtn.addEventListener('click', () => {
     } else {
         alert("Please select a role before joining the game.");
     }
+
     localStorage.removeItem('selectedRolePath'); // Clear selection after use
+});
+joinGameBtn.addEventListener('click', async () => {
+    const response = await fetch('./scripts/config.json');
+    const data = await response.json();
+    
+    const nameInput = document.getElementById('nameInput').value.trim();
+    let finalUsername = nameInput || data.initialState.defaultUsername;
+
+    if (finalUsername != null) {
+        localStorage.setItem('username', finalUsername);
+    }
 });
 
 

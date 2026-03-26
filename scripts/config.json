@@ -1,5 +1,11 @@
 {
-  "roles": [
+    "initialState": {
+    "defaultBankroll": 1000,
+    "minNameLength": 2,
+    "defaultUsername": "null"
+  },
+    
+    "roles": [
     { "id": "dealer", "name": "Dealer", "path": "./dealer.html" },
     { "id": "player", "name": "Player", "path": "./player.html" }
   ]
