@@ -33,7 +33,7 @@ let lossCount = 0;
 let delayDealerReveal = false;
 
 homeBtn.addEventListener("click", () => {
-    window.location.href = "../../index.html";
+    window.location.href = "index.html";
 });
 
 window.addEventListener("keydown", (event) => {
