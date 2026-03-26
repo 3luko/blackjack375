@@ -2,54 +2,50 @@ import Game from "./game.js";
 
 const game = new Game();
 
-game.startGame();
-showHands(game);
+const homeBtn = document.getElementById("home");
+homeBtn.addEventListener("click", () => {
+    window.location.href = "../../index.html";
+});
 
-//button start
 const hitBtn = document.getElementById("hit");
 const standBtn = document.getElementById("stand");
 const restartBtn = document.getElementById("restart");
 
+game.startGame();
+showHands();
+updateButtons();
+
 hitBtn.addEventListener("click", () => {
     game.hit();
-    showHands(game);
+    showHands();
+    updateButtons();
 });
 
 standBtn.addEventListener("click", () => {
     game.stand();
-    showHands(game);
+    showHands();
+    updateButtons();
 });
 
 restartBtn.addEventListener("click", () => {
     game.startGame();
-    showHands(game);
+    showHands();
+    updateButtons();
 });
-//button end
 
-
-// function for symbols
-function getSuitSymbol(suit) {
-    const suits = {
-        Hearts: "♥",
-        Diamonds: "♦",
-        Clubs: "♣",
-        Spades: "♠"
-    };
-
-    return suits[suit];
+function updateButtons() {
+    hitBtn.disabled = game.isRoundOver;
+    standBtn.disabled = game.isRoundOver;
 }
 
-
-
-function showHands(game) {
-
+function showHands() {
     const playerCardsDiv = document.getElementById("playerCards");
     const dealerCardsDiv = document.getElementById("dealerCards");
 
     const playerScore = document.getElementById("playerScore");
     const dealerScore = document.getElementById("dealerScore");
+    const gameStatus = document.getElementById("gameStatus");
 
-    // clear existing cards
     playerCardsDiv.innerHTML = "";
     dealerCardsDiv.innerHTML = "";
 
@@ -57,22 +53,41 @@ function showHands(game) {
     game.playerHand.forEach(card => {
         const cardEl = document.createElement("img");
         cardEl.classList.add("card");
-        cardEl.src = card.imgPath;
-        cardEl.alt = `${card.value} of ${card.suit}`;
+
+        if (!game.isRoundOver) {
+            // hidden second dealer card during round
+            cardEl.src = "image/card_back.png";
+            cardEl.alt = "Hidden card";
+        } else {
+            cardEl.src = card.imgPath;
+            cardEl.alt = `${card.name} of ${card.suit}`;
+        }
+
         playerCardsDiv.appendChild(cardEl);
+
     });
 
     // show dealer cards
-    game.dealerHand.forEach(card => {
+    game.dealerHand.forEach((card, index) => {
         const cardEl = document.createElement("img");
         cardEl.classList.add("card");
+
         cardEl.src = card.imgPath;
-        cardEl.alt = `${card.value} of ${card.suit}`;
+        cardEl.alt = `${card.name} of ${card.suit}`;
+
         dealerCardsDiv.appendChild(cardEl);
     });
 
-    // update score
+    // update player score
     playerScore.textContent = "Score: " + game.getPlayerScore();
-    dealerScore.textContent = "Score: " + game.getDealerScore();
-}
 
+    // update dealer score
+    if (game.isRoundOver) {
+        dealerScore.textContent = "Score: " + game.getDealerScore();
+    } else {
+        dealerScore.textContent = "Score: ?";
+    }
+
+    // update status message
+    gameStatus.textContent = game.statusMessage;
+}

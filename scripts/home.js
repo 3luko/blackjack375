@@ -1,23 +1,74 @@
-// home.js
+async function loadRoles() {
+    try {
+        // Load JSON file
+        const response = await fetch('./scripts/config.json');
+        if (!response.ok) throw new Error("Failed to load config.json");
+        
+        const data = await response.json();
+        
+        // Buttons container
+        const container = document.getElementById('roleButtonContainer');
+        container.innerHTML = ''; // Clear "Loading..." or old button
 
-let selectedRole = "";
+        // Get roles from JSON and create buttons
+        data.roles.forEach(role => {
+            const btn = document.createElement('button');
+            btn.textContent = role.name;
+            btn.className = "rolebtn";
+            
+            // Save selection to localStorage on click
+            btn.onclick = () => {
+                document.querySelectorAll('.rolebtn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                
+                // Save the path to "Join Game" button
+                localStorage.setItem('selectedRolePath', role.path);
+                console.log(`Role selected: ${role.name}`);
 
-// input name text
-const nameInput = document.getElementById("nameInput");
+                // Change color of selected button
+                document.querySelectorAll('.rolebtn').forEach(b => b.style.backgroundColor = '');
+                btn.style.backgroundColor = '#A9A9A9'; // Green
+            };
 
-// button
-const roleBtn = document.querySelectorAll(".rolebtn");
-const joinBtn = document.getElementById("join");
+            container.appendChild(btn);
+        });
 
+    } catch (error) {
+        console.error("Error initializing roles:", error);
+        document.getElementById('roleButtonContainer').innerHTML = 
+            `<p style="color:red">Error loading roles. Check console.</p>`;
+    }
+}
 
-roleBtn.forEach(btn => {
-    btn.addEventListener("click", function() {
-        selectedRole = this.getAttribute("data-role");
-        roleBtn.forEach(b => b.style.backgroundColor = ""); // reset all buttons
-        this.style.backgroundColor = "lightblue"; // highlight selected button
-    });
+//Join Game button logic
+const joinGameBtn = document.getElementById('join');
+joinGameBtn.addEventListener('click', () => {
+    const selectedPath = localStorage.getItem('selectedRolePath');
+    if (selectedPath) {
+        window.location.href = selectedPath;
+    } else {
+        alert("Please select a role before joining the game.");
+    }
+
+    localStorage.removeItem('selectedRolePath'); // Clear selection after use
 });
-joinBtn.addEventListener("click", function() {
-    window.location.href = selectedRole;
+joinGameBtn.addEventListener('click', async () => {
+    const response = await fetch('./scripts/config.json');
+    const data = await response.json();
+    
+    const nameInput = document.getElementById('nameInput').value.trim();
+    let finalUsername = nameInput || data.initialState.defaultUsername;
+
+    if (finalUsername != null) {
+        localStorage.setItem('username', finalUsername);
+    }
 });
 
+// Instructions button logic
+const instructionBtn = document.getElementById('instruction');
+instructionBtn.addEventListener('click', () => {
+    alert("Welcome to Blackjack!\n\nRules:\n- Get as close to 21 as you can without going over.\n- Dealer must hit until they have at least 17.\n- You can hit, stand, double down, or split.\n- Good luck!");
+});
+
+// Initialize when the page is ready
+window.addEventListener('DOMContentLoaded', loadRoles);

@@ -11,38 +11,22 @@
   <body>
     
     <div id="layout">
-      <img src="image\blackjacklogo.png" alt="Blackjack Logo" id="logo">
-<details id="instructions">
-  <summary>How to Play</summary>
-  <p>
-    Get as close to 21 as possible without going over.<br><br>
-
-    Card values:<br>
-    • Number cards = face value<br>
-    • J, Q, K = 10<br>
-    • Ace = 1 or 11<br><br>
-
-    How to play:<br>
-    • Player goes first (Hit or Stand)<br>
-    • Dealer draws until 17<br><br>
-
-    Go over 21 = <span id="bad-word">you lose</span>.
-  </p>
-</details>
-  
-    <div id="enterName">
-        <h3>Please enter your name:</h3>
-        <input type="text" id="nameInput" placeholder="Enter your name here">
-    </div>
-    <div id="enterRole">
-        <h3>Please choose a role you want to play:</h3>
-        <button class="rolebtn" data-role="./dealerview.html">Dealer</button>
-        <button class="rolebtn" data-role="./playerview.html">Player</button>
-    </div>
-    <br>
-    <div id="nav">
-        <button id="join">Join Game</button>    
-    </div>
+      <div id="nav">
+        <button id="instruction">Instruction</button>    
+      </div>
+      <h1>Blackjack</h1>    
+      <div id="enterName">
+          <h3>Please enter your name:</h3>
+          <input type="text" id="nameInput" placeholder="Enter your name here">
+      </div>
+      <div id="enterRole">
+          <h3>Please choose a role you want to play:</h3>
+          <div id="roleButtonContainer"></div>
+      </div>
+      <br>
+      <div id="nav">
+          <button id="join">Join Game</button>    
+      </div>
     </div> 
     
     <script type="module" src="./scripts/home.js"></script>

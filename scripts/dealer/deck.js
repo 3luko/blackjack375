@@ -5,7 +5,7 @@ class Deck {
         this.cards = [];
         this.suits = ["heart", "diamond", "club", "spade"];
         this.values = [
-            { name: "1", value: 11 },
+            { name: "A", value: 11 },
             { name: "2", value: 2 },
             { name: "3", value: 3 },
             { name: "4", value: 4 },
@@ -15,9 +15,9 @@ class Deck {
             { name: "8", value: 8 },
             { name: "9", value: 9 },
             { name: "10", value: 10 },
-            { name: "11", value: 10 },
-            { name: "12", value: 10 },
-            { name: "13", value: 10 }
+            { name: "J", value: 10 },
+            { name: "Q", value: 10 },
+            { name: "K", value: 10 }
         ];
     }
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <div id="layout">
+      <div id="nav">
+          <button id="home">Home</button>
+      </div>
+      <h1>Blackjack</h1>
+
+      <div id="game">
+        <p id="gameStatus"></p>
+        
+        <div id="win-loss">
+          <p id="winCount">Win: <span id="win">0</span></p>
+          <p id="lossCount">Loss: <span id="loss">0</span></p>
+        </div>
+
+        <div id="dealerArea">
+          <h2>Dealer</h2>
+          <div id="dealerCards"></div>
+          <p id="dealerScore">Score: ?</p>
+        </div>
+
+        <div id="deckArea">
+          <img id="hitDeck" src="./image/card_back.png" alt="Deck of cards" draggable="true">
+          <p>Drag card to your hand to Hit</p>
+        </div>
+
+        <div id="playerArea">
+          <h2>Player: <span id="username">Loading...</span></h2>
+          <div id="playerCards"></div>
+          <p id="playerScore">Score: 0</p>
+        </div>
+      </div>
+
+      <div id="betsystem">
+        <p>Bankroll: $<span id="balance">0</span></p>
+        
+        <label for="bet-input">Place your bet:</label>
+        <input type="number" id="bet-input" min="10" step="10" value="10">
+        
+        <button id="bet-btn">Bet Now</button>
+      </div>
+
+      <div id="controls">
+        <button id="stand">Stand</button>
+        <button id="double">Double</button>
+        <button id="split">Split</button>
+        <button id="surrender">Surrender</button>
+        <button id="restart">Restart</button>
+      </div>
+    </div>
+
+    <script type="module" src="./scripts/player/main.js"></script>
+  </body>
+</html>
