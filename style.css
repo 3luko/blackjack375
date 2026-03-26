@@ -53,6 +53,13 @@ body {
     box-shadow: 0 0 0 3px rgba(56, 140, 60, 0.25);
 }
 
+#logo {
+  display: block;
+  margin: 0 auto;       /* centers it */
+  width: 300px;         /* adjust based on your image */
+  max-width: 80%;       /* keeps it responsive */
+}
+
 #layout.awaiting-bet #bet-btn {
     font-weight: 700;
 }
