@@ -29,5 +29,14 @@
         { "name": "J", "value": 10 },
         { "name": "K", "value": 10 },
         { "name": "Q", "value": 10 }
-        ]
+        ],
+
+    "instruction": [
+        "Welcome to the Blackjack Game!",
+        "The goal is to get as close to 21 as possible without going over.",
+        "Each player starts with two cards and can choose to 'Hit' (get another card) or 'Stand' (keep current hand).",
+        "The dealer will reveal their hidden card after all players have finished their turns.",
+        "If your hand exceeds 21, you lose. If the dealer's hand exceeds 21, you win!",
+        "Good luck and have fun playing!"
+    ]
 }

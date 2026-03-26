@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    
+    <div id="layout">
+      <div id="nav">
+          <button id="home">Home</button>
+      </div>
+      <h1>Blackjack</h1>    
+      <div id="overallRules">
+          <h2>Game Rules:</h2>
+          <ul>
+              <li>Get as close to 21 as possible without going over.</li>
+              <li>Dealer must hit until they have at least 17.</li>
+              <li>Blackjack (Ace + 10-value card) pays 3:2.</li>
+          </ul>
+      </div>
+      <div id="playRules">
+          <h2>How to Play:</h2>
+            <h3>Hit and Stand:</h3>
+            <ul>
+                <li>Hit: Take another card to try to get closer to 21.</li>
+                <li>Stand: Keep your current hand and end your turn.</li>
+            </ul>
+            <h3>Double:</h3>
+            <ul>
+                <li>Double your initial bet and receive exactly one more card.</li>
+                <li>Only available on your first two cards.</li>
+            </ul>
+            <h3>Split:</h3>
+            <ul>
+                <li>If you have two cards of the same value, you can split them, remove one card and choose a different card instead.</li>
+            </ul>
+            <h3>Surrender:</h3>
+            <ul>
+                <li>Forfeit half your bet and end your hand immediately.</li>
+                <li>Only available on your first two cards.</li>
+            </ul>
+      </div>
+      <div id="leaderboardRules">
+          <h2>Leaderboard:</h2>
+            <ul>
+                <li>Top 5 players with the highest winnings will be displayed on the leaderboard.</li>
+                <li>Winnings are calculated based on the total amount won minus the total amount bet.</li>
+            </ul>   
+      </div>
+    </div> 
+    
+    <script type="module" src="./scripts/instruction.js"></script>
+  </body>
+</html>
