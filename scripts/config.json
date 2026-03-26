@@ -1,0 +1,41 @@
+{
+    "initialState": {
+        "defaultBankroll": 1000,
+        "minNameLength": 2,
+        "defaultUsername": "Anonymous"
+        },
+    
+    // "roles": [
+    //     { "id": "dealer", "name": "Dealer", "path": "./dealer.html" },
+    //     { "id": "player", "name": "Player", "path": "./player.html" }
+    //     ],
+
+  "assets": {
+        "cardBack": "image/card_back.png",
+        "spritesheet": "image/cards_spritesheet.png"
+        },
+  "suits": ["club", "diamond", "heart", "spade"],
+  "cards": [
+        { "name": "A", "value": 11 },
+        { "name": "2", "value": 2 },
+        { "name": "3", "value": 3 },
+        { "name": "4", "value": 4 },
+        { "name": "5", "value": 5 },
+        { "name": "6", "value": 6 },
+        { "name": "7", "value": 7 },
+        { "name": "8", "value": 8 },
+        { "name": "9", "value": 9 },
+        { "name": "10", "value": 10 },
+        { "name": "J", "value": 10 },
+        { "name": "K", "value": 10 },
+        { "name": "Q", "value": 10 }
+        ],
+
+    "leaderboard": [
+        { "rank": 1, "name": "Alice", "wins": 15 },
+        { "rank": 2, "name": "Bob", "wins": 12 },
+        { "rank": 3, "name": "Charlie", "wins": 10 },
+        { "rank": 4, "name": "David", "wins": 8 },
+        { "rank": 5, "name": "Eve", "wins": 5 }
+    ]
+}
