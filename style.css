@@ -48,6 +48,15 @@ body {
     margin-bottom: 20px;
 }
 
+#layout.awaiting-bet #betsystem {
+    background-color: rgba(56, 140, 60, 0.18);
+    box-shadow: 0 0 0 3px rgba(56, 140, 60, 0.25);
+}
+
+#layout.awaiting-bet #bet-btn {
+    font-weight: 700;
+}
+
 /* Specific narrow version for the Login/Home page only */
 #homePage #layout {
     max-width: 400px;
@@ -65,6 +74,29 @@ body {
     margin-top: -15px;
 }
 
+#betsystem {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+#betPrompt {
+    margin: 8px 0 12px;
+    font-weight: 700;
+    color: #d7ffd9;
+}
+
+#historyList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+#historyList li {
+    margin: 4px 0;
+}
+
 /* =========================================
    3. REUSABLE COMPONENTS (Cards & UI)
    ========================================= */
@@ -74,6 +106,17 @@ body {
     gap: 10px;
     margin: 15px 0;
     flex-wrap: wrap;
+}
+
+#game,
+#controls {
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.gameplay-disabled {
+    opacity: 0.45;
+    filter: grayscale(0.35);
+    pointer-events: none;
 }
 
 .card {
